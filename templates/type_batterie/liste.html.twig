@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Types de Batteries
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1>Liste des Types de Batteries</h1>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Référence</th>
+					<th>Capacité en Watts</th>
+					<th>Pays</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for batterie in batteries %}
+					<tr>
+						<td>{{ batterie.reference }}</td>
+						<td>{{ batterie.capacite }}</td>
+						<td>{{ batterie.pays }}</td>
+						<td>
+
+							<a href="{{ path('modifier_typebatterie', {id: batterie.id}) }}" class="text-decoration-none">
+								<i class="bi bi-pen-fill text-dark ms-2"></i>
+							</a>
+							<a href="{{path('supprimer_typebatterie', {id: batterie.id}) }}">
+								<i class="bi bi-trash-fill text-dark"></i>
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4">Aucune batterie trouvée.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
